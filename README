@@ -1,0 +1,5 @@
+Assuming you're using bitlbee, and logging bitlbee's control channel, and
+have set new messages to arrive in the control channel, then copy the
+scripts to your bin directory, modifying as necessary, and add do_aim.sh to
+your cron:
+* * * * * $HOME/bin/do_aim.sh
