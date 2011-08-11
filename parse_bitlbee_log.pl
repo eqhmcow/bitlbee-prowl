@@ -34,10 +34,12 @@ my $NICK = 'bear';
 while (<>) {
     my @parse;
     next unless @parse =
-        m/^(\d+:\d+) <(?:\@?($NICK)> ([^:]+): |.([^>]+)> ($NICK): )(.*)$/;
+        (m/^(\d+:\d+) <(?:\@?($NICK)> ([^:]+): |.([^>]+)> ($NICK): |.([^>]+)> (oscar) - )(.*)$/);
     my ($time, $type, $nick, $text) = ($parse[0], $parse[1] ?
-        ('send', $parse[2], $parse[5]) :
-        ('recv', $parse[3], $parse[5]));
+        ('send', $parse[2], $parse[7]) :
+        $parse[3] ?
+            ('recv', $parse[3], $parse[7]) :
+            ('recv', $parse[5], $parse[7]));
     write_log({
         'epoch' => str2time($time),
         'type'  => $type,
